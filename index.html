@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS CEDRIC STORE - Free Fire</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6fb;
+    color:#172033;
+}
+
+header{
+    background:white;
+    padding:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 10px #0001;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#2878f0;
+}
+
+.admin{
+    color:#20a86b;
+    font-size:13px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#071329,#243b80);
+    color:white;
+    padding:30px 20px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:36px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    opacity:.9;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    padding:15px;
+    overflow-x:auto;
+    background:white;
+}
+
+.tab{
+    border:0;
+    background:#eee;
+    padding:13px 20px;
+    border-radius:25px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.tab.active{
+    background:#2878f0;
+    color:white;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.section-title{
+    margin:10px 0 20px;
+    font-size:24px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.product{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 4px 15px #00000010;
+    border:2px solid transparent;
+}
+
+.product.selected{
+    border-color:#2878f0;
+}
+
+.diamond{
+    font-size:42px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.product h3{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.bonus{
+    text-align:center;
+    color:#1ba56b;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.price{
+    color:#2878f0;
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+button{
+    cursor:pointer;
+}
+
+.add{
+    width:100%;
+    border:0;
+    background:#172033;
+    color:white;
+    padding:13px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.selected .add{
+    background:#2878f0;
+}
+
+.form-box{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    margin-top:25px;
+    box-shadow:0 4px 15px #00000010;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:15px 0 7px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+}
+
+.payment{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:10px;
+}
+
+.pay{
+    padding:18px;
+    border-radius:15px;
+    border:2px solid #ddd;
+    background:white;
+    text-align:center;
+    font-weight:bold;
+}
+
+.pay.orange{
+    border-color:#ff7900;
+}
+
+.pay.mvola{
+    border-color:#18a95a;
+}
+
+.pay.active{
+    color:white;
+}
+
+.pay.orange.active{
+    background:#ff7900;
+}
+
+.pay.mvola.active{
+    background:#18a95a;
+}
+
+.payment-info{
+    margin-top:15px;
+    background:#f1f4f9;
+    padding:15px;
+    border-radius:12px;
+    display:none;
+}
+
+.copy{
+    margin-top:10px;
+    border:0;
+    padding:10px 15px;
+    border-radius:8px;
+    background:#2878f0;
+    color:white;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid #ddd;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.send{
+    width:100%;
+    margin-top:20px;
+    padding:17px;
+    border:0;
+    border-radius:14px;
+    background:#2878f0;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.instructions{
+    margin-top:20px;
+    background:#fff8df;
+    padding:16px;
+    border-radius:14px;
+    line-height:1.6;
+}
+
+.hidden{
+    display:none;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
+
+@media(max-width:600px){
+    .products{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .product{
+        padding:14px;
+    }
+
+    .price{
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <div class="logo">KS <span>CEDRIC STORE</span></div>
+        <div class="admin">● ADMIN EN LIGNE</div>
+    </div>
+    <div>🛒 <span id="cartCount">0</span></div>
+</header>
+
+<section class="hero">
+    <h1>FREE FIRE</h1>
+    <p>Recharge rapide et sécurisée</p>
+</section>
+
+<div class="tabs">
+    <button class="tab active" onclick="showSection('diamonds',this)">
+        💎 Diamants
+    </button>
+
+    <button class="tab" onclick="showSection('levelup',this)">
+        📈 Level Up
+    </button>
+</div>
+
+<main class="container">
+
+<!-- DIAMANTS -->
+<section id="diamonds">
+
+<h2 class="section-title">💎 Recharge Diamants</h2>
+
+<div class="products">
+
+<div class="product" data-name="110 Diamants" data-price="4500">
+<div class="diamond">💎</div>
+<h3>110 Diamants</h3>
+<div class="bonus">100 + 10 BONUS</div>
+<div class="price">4 500 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="231 Diamants" data-price="9100">
+<div class="diamond">💎</div>
+<h3>231 Diamants</h3>
+<div class="bonus">210 + 21 BONUS</div>
+<div class="price">9 100 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="341 Diamants" data-price="13700">
+<div class="diamond">💎</div>
+<h3>341 Diamants</h3>
+<div class="bonus">310 + 31 BONUS</div>
+<div class="price">13 700 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="462 Diamants" data-price="18200">
+<div class="diamond">💎</div>
+<h3>462 Diamants</h3>
+<div class="bonus">420 + 42 BONUS</div>
+<div class="price">18 200 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="583 Diamants" data-price="22800">
+<div class="diamond">💎</div>
+<h3>583 Diamants</h3>
+<div class="bonus">530 + 53 BONUS</div>
+<div class="price">22 800 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="1188 Diamants" data-price="45500">
+<div class="diamond">💎</div>
+<h3>1188 Diamants</h3>
+<div class="price">45 500 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="2420 Diamants" data-price="91000">
+<div class="diamond">💎</div>
+<h3>2420 Diamants</h3>
+<div class="price">91 000 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="2651 Diamants" data-price="100000">
+<div class="diamond">💎</div>
+<h3>2651 Diamants</h3>
+<div class="price">100 000 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+</div>
+</section>
+
+
+<!-- LEVEL UP -->
+<section id="levelup" class="hidden">
+
+<h2 class="section-title">📈 Level Up Free Fire</h2>
+
+<div class="products">
+
+<div class="product" data-name="Level Up 6" data-price="2800">
+<div class="diamond">⬆️</div>
+<h3>Level 6</h3>
+<div class="bonus">120 💎</div>
+<div class="price">2 800 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="Level Up 10" data-price="3700">
+<div class="diamond">⬆️</div>
+<h3>Level 10</h3>
+<div class="bonus">200 💎</div>
+<div class="price">3 700 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="Level Up 15" data-price="3700">
+<div class="diamond">⬆️</div>
+<h3>Level 15</h3>
+<div class="bonus">200 💎</div>
+<div class="price">3 700 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="Level Up 20" data-price="3700">
+<div class="diamond">⬆️</div>
+<h3>Level 20</h3>
+<div class="bonus">200 💎</div>
+<div class="price">3 700 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="Level Up 25" data-price="3700">
+<div class="diamond">⬆️</div>
+<h3>Level 25</h3>
+<div class="bonus">200 💎</div>
+<div class="price">3 700 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+<div class="product" data-name="Level Up 30" data-price="5500">
+<div class="diamond">⬆️</div>
+<h3>Level 30</h3>
+<div class="bonus">350 💎</div>
+<div class="price">5 500 Ar</div>
+<button class="add" onclick="addProduct(this)">AJOUTER</button>
+</div>
+
+</div>
+</section>
+
+
+<!-- COMMANDE -->
+<div class="form-box">
+
+<h2>🛒 Votre commande</h2>
+
+<label>Player ID Free Fire</label>
+<input id="playerId" type="number" placeholder="Entrez votre ID Free Fire">
+
+<label>Votre numéro de téléphone</label>
+<input id="phone" type="tel" placeholder="034 XX XXX XX">
+
+<label>Moyen de paiement</label>
+
+<div class="payment">
+
+<button class="pay orange" onclick="choosePayment('Orange Money',this)">
+🟠<br>Orange Money
+</button>
+
+<button class="pay mvola" onclick="choosePayment('MVola',this)">
+🟢<br>MVola
+</button>
+
+</div>
+
+<div id="paymentInfo" class="payment-info">
+    <strong id="paymentTitle"></strong>
+    <br>
+    Numéro : <strong id="paymentNumber"></strong>
+    <br>
+    <button class="copy" onclick="copyNumber()">
+        📋 Copier le numéro
+    </button>
+</div>
+
+<div class="total">
+    <span>Total</span>
+    <span id="total">0 Ar</span>
+</div>
+
+<div class="instructions">
+<strong>📌 Comment commander ?</strong><br>
+1. Choisis ton produit.<br>
+2. Entre ton Player ID.<br>
+3. Choisis Orange Money ou MVola.<br>
+4. Fais le paiement sur le numéro affiché.<br>
+5. Appuie sur « Envoyer la commande ».
+</div>
+
+<button class="send" onclick="sendOrder()">
+📨 ENVOYER LA COMMANDE
+</button>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 KS CEDRIC STORE — Free Fire
+</footer>
+
+
+<script>
+
+let selectedProduct = null;
+let selectedPayment = "";
+let paymentNumber = "";
+
+const payments = {
+    "Orange Money":"0375437784",
+    "MVola":"0347093622"
+};
+
+function addProduct(button){
+
+    document.querySelectorAll(".product").forEach(p=>{
+        p.classList.remove("selected");
+        p.querySelector(".add").textContent="AJOUTER";
+    });
+
+    const product = button.parentElement;
+
+    product.classList.add("selected");
+    button.textContent="✓ AJOUTÉ";
+
+    selectedProduct = {
+        name: product.dataset.name,
+        price: Number(product.dataset.price)
+    };
+
+    document.getElementById("total").textContent =
+        selectedProduct.price.toLocaleString("fr-FR")+" Ar";
+
+    document.querySelector(".form-box").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+function choosePayment(method,button){
+
+    selectedPayment = method;
+    paymentNumber = payments[method];
+
+    document.querySelectorAll(".pay").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.getElementById("paymentTitle").textContent =
+        "Paiement "+method;
+
+    document.getElementById("paymentNumber").textContent =
+        paymentNumber;
+
+    document.getElementById("paymentInfo").style.display="block";
+}
+
+function copyNumber(){
+
+    navigator.clipboard.writeText(paymentNumber)
+    .then(()=>{
+        alert("Numéro copié : "+paymentNumber);
+    })
+    .catch(()=>{
+        alert("Numéro : "+paymentNumber);
+    });
+}
+
+function sendOrder(){
+
+    if(!selectedProduct){
+        alert("Choisis d'abord un produit.");
+        return;
+    }
+
+    const playerId =
+        document.getElementById("playerId").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    if(!playerId){
+        alert("Entre ton Player ID Free Fire.");
+        return;
+    }
+
+    if(!phone){
+        alert("Entre ton numéro de téléphone.");
+        return;
+    }
+
+    if(!selectedPayment){
+        alert("Choisis ton moyen de paiement.");
+        return;
+    }
+
+    const message =
+`COMMANDE KS CEDRIC STORE
+
+Produit : ${selectedProduct.name}
+Prix : ${selectedProduct.price.toLocaleString("fr-FR")} Ar
+Player ID : ${playerId}
+Téléphone client : ${phone}
+Paiement : ${selectedPayment}
+
+J'ai effectué le paiement. Merci de vérifier ma commande.`;
+
+    /*
+       On ouvre l'application SMS.
+       Cela ENVOIE LA COMMANDE, pas l'argent.
+    */
+
+    const smsURL =
+        "sms:"+paymentNumber+"?body="+encodeURIComponent(message);
+
+    window.location.href = smsURL;
+}
+
+function showSection(section,button){
+
+    document.getElementById("diamonds").classList.add("hidden");
+    document.getElementById("levelup").classList.add("hidden");
+
+    document.getElementById(section).classList.remove("hidden");
+
+    document.querySelectorAll(".tab").forEach(t=>{
+        t.classList.remove("active");
+    });
+
+    button.classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
